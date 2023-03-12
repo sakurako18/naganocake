@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  root :to => "public/homes#top"
+
+  get "/about" => "public/homes#about", as: "about"
 
   namespace :admin do
     get 'orders/show'
@@ -48,7 +51,10 @@ Rails.application.routes.draw do
     get 'homes/top'
     get 'homes/about'
   end
-
+  namespace :public do
+    get 'items/index'
+    get 'homes/show'
+  end
 
 devise_for :customers,skip: [:passwords], controllers: {
   registrations: "public/registrations",
