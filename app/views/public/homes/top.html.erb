@@ -1,47 +1,4 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Naganocake</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
 
-    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
-
-  <body>
-  <header>
-    <% if customer_signed_in? %>
-      <li>
-        <%= link_to "マイページ", public_customers_show_path %>
-      </li>
-      <li>
-        <%= link_to "商品一覧", public_items_index_path %>
-      </li>
-      <li>
-        <%= link_to "カート", public_cart_items_index_path %>
-      </il>
-      <li>
-        <%= link_to "ログアウト", destroy_customer_session_path, method: :delete %>
-      </li>
-    <% else %>
-      <li>
-        <%= link_to "About", public_homes_about_path %>
-      </li>
-      <li>
-        <%= link_to "商品一覧", public_items_index_path %>
-      </li>
-      <li>
-        <%= link_to "新規登録", new_customer_registration_path %>
-      </li>
-      <li>
-        <%= link_to "ログイン", new_customer_session_path %>
-      </li>
-    <% end %>
-  </header>
-    <%= yield %>
-  </body>
 
 <p>ようこそ、ながのCAKEへ！</p>
 <p>このサイトは、ケーキ販売のECサイトになります。</p>
@@ -51,5 +8,3 @@
 
  <h1>新着商品</h1>
 
-
-</html>

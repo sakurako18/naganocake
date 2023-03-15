@@ -8,7 +8,7 @@
 
   <% @items.each do |item| %>
 
-    <td><%= item.1d %></td>
+    <td><%= item.id %></td>
     <%= link_to admin_items_show_path(@item.id) do %>
     <td><%= item.name %></td>
      <% end %>

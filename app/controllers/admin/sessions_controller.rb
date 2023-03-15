@@ -1,6 +1,28 @@
 class Admin::SessionsController < Devise::SessionsController
   before_action :check_admin
-  layout 'admin/layouts/application'
+  layout 'layouts/application'
+
+  # GET /resource/sign_in
+  # def new
+  #   super
+  # end
+
+# def create
+#   @admin  = current_admin.id
+# end
+
+  def create
+    @admin = Admin.find_by(email: params[:session][:email].downcase)
+    if admin && admin.authenticate(params[:session][:password])
+      log_in user
+      redirect_to root_url
+    else
+      render 'new'
+    end
+  end
+
+ def destroy
+ end
 
   private
 
@@ -10,6 +32,8 @@ class Admin::SessionsController < Devise::SessionsController
   end
 
   def check_admin
-    redirect_to root_path, warning: '権限がありません' unless current_user.admin?
+    if admin_signed_in?
+    redirect_to root_path
+    end
   end
 end

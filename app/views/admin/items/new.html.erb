@@ -1,6 +1,5 @@
   <h3>商品新規登録</h3>
 
-<%= form_with model: @item, url:admin_items_show_path do |f| %>
 
   <p>商品画像</p>
   <%= f.file_field :image, accept: "image/*" %>
@@ -18,5 +17,3 @@
   <%= f.text_area :price %>円
 
   <%= f.submit '新規登録' %>
-
-<% end %>

@@ -1,13 +1,13 @@
       <h3>管理者ログイン</h3>
-      
-      <%=form_with model: @genre,url: admin_genres_path, method: :post do |f| %>
-      
+
+      <%=form_with model: @admin,url: admin_session_path, method: :post do |f| %>
+
         <td><%= f.label :"メールアドレス", class: "mr-3" %></td>
         <td><%= f.text_field :email, autofocus: true, class: "mr-5" %></td>
-        
-        <td><%= f.label :"メールアドレス", class: "mr-3" %></td>
+
+        <td><%= f.label :"パスワード", class: "mr-3" %></td>
         <td><%= f.text_field :password, autocomplete: "current-password", class: "mr-5" %></td>
-        
+
         <td><%= f.submit'新規登録',class: "btn btn-primary" %></td>
       <% end %>
 
