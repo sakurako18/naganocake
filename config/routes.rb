@@ -27,9 +27,9 @@ Rails.application.routes.draw do
 
     resources :items, only: [:index, :show]
 
-    resources :customers, only: [:index,:show, :edit, :update]
+    resource :customers, only: [:index,:show, :edit, :update]
     get "/customers/unsubscribe" => "customers#unsubscribe"  #顧客の退会確認画面
-    get "/customers/withdraw" => "customers#withdraw"        #顧客の退会処理
+    patch "/customers/withdraw" => "customers#withdraw"        #顧客の退会処理
 
     resources :cart_items, only: [:index, :update, :destroy, :destroy_all, :create]
     get "/cart_items/destroy_all" => "cart_items#destroy_all" #カート内商品一括削除

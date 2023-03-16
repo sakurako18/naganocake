@@ -1,5 +1,4 @@
 class Admin::SessionsController < Devise::SessionsController
-  before_action :check_admin
   layout 'layouts/application'
 
   # GET /resource/sign_in
@@ -7,22 +6,21 @@ class Admin::SessionsController < Devise::SessionsController
   #   super
   # end
 
-# def create
-#   @admin  = current_admin.id
-# end
-
   def create
-    @admin = Admin.find_by(email: params[:session][:email].downcase)
-    if admin && admin.authenticate(params[:session][:password])
-      log_in user
-      redirect_to root_url
-    else
-      render 'new'
-    end
+    super
   end
 
  def destroy
+   super
  end
+
+  def after_sign_in_path_for(resource)
+    admin_path
+  end
+
+  def after_sign_out_path_for(resource)
+    new_admin_session_path
+  end
 
   private
 
@@ -31,9 +29,4 @@ class Admin::SessionsController < Devise::SessionsController
     redirect_to admin_login_path
   end
 
-  def check_admin
-    if admin_signed_in?
-    redirect_to root_path
-    end
-  end
 end

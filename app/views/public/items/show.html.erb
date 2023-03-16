@@ -1,2 +1,18 @@
-<h1>Public::Customers#show</h1>
-<p>Find me in app/views/public/customers/show.html.erb</p>
+<h2>商品詳細</h2>
+　<% @items.each do |item| %>
+
+  <%= f.file_field :image, accept: "image/*" %>
+  <p>商品名</p>
+  <%= item.name %>
+  <p>商品説明</p>
+  <%= item.introduction %>
+  <p>ジャンル</p>
+   <%= item.genre_id %>
+  <p>税込価格(税抜価格)</p>
+   <%= item.price %>
+
+  <p>販売ステータス</p>
+
+  <%end%>
+
+  <%= f.submit "編集する", class: "btn btn-success" %>
