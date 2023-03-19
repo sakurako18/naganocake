@@ -1,11 +1,67 @@
+  <div class="col-md-12 col-xl-12">
+      <h2>商品詳細</h2><br>
+  </div>
+
+    <div class="row">
+      <div class="col-md-5 col-xl-5">
+
+      </div>
+
+      <div class="col-md-7">
+        <table class="table">
+          <tbody>
+            <tr>
+              <td>商品名</td>
+              <td><%= @item.name %></td>
+            </tr>
+            <tr>
+              <td>商品説明</td>
+              <td><%= @item.introduction %></td>
+            </tr>
+            <tr>
+              <td>ジャンル</td>
+              <td><%= @item.genre_id_change %></td>
+            </tr>
+            <tr>
+              <td>税込価格</td>
+              <td><%= (@item.price_without_tax*1.1).floor %>円</td>
+            </tr>
+            <tr>
+              <td>販売ステータス</td>
+              <td>
+              <% if @item.is_sales_status == true %>
+              販売中
+              <% else %>
+              販売停止中
+              <% end %>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+        <div class="col-md-offset-1 col-md-2 text-right">
+          <%= link_to "編集する", edit_admin_item_path(@item.id), class: "btn btn-success" %>
+        </div>
+
+
+
+
+
+
+
+
+
+
   <h3>商品詳細</h3>
 
 <div>
-  <%= image_tag item.get_image, size: '100x100' %>
-  <p>商品名：<%= XXX.shop_name %></p>
-  <p>商品説明：<%= XXX.caption %></p>
+  <%= image_tag @item.get_image, size: '100x100' %>
+
+  <p>商品名：<%= @item.shop_name %></p>
+  <p>商品説明：<%= @item.caption %></p>
   <p>ジャンル：<%= image_tag 'sample-author1.jpg' %></p>
-  <p>税込価格(税抜価格)：<%= XXX.user.name %></p>
-  <p>商品ステータス：<%= XXX.created_at.strftime('%Y/%m/%d') %></p>
+  <p>税込価格(税抜価格)：<%= @item.user.name %></p>
+  <p>商品ステータス：<%= @item.created_at.strftime('%Y/%m/%d') %></p>
     <%= f.submit '編集する' %>
 </div>

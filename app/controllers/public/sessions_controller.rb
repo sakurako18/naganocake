@@ -2,28 +2,32 @@
 class Public::SessionsController < Devise::SessionsController
  before_action :customer_state, only: [:create]
 
- def new
-  @customer = Customer.new
- end
+# before_action :configure_sign_in_params, only: [:create]
 
- def create
-   @customer = current_customer.id
- end
+  # GET /resource/sign_in
+  # def new
+  #   super
+  # end
 
- def destroy
- end
+  # POST /resource/sign_in
+  # def create
+  #   super
+  # end
 
-def after_sign_in_path_for(resource)
+  # DELETE /resource/sign_out
+  # def destroy
+  #   super
+  # end
+
+  def after_sign_in_path_for(resource)
     root_path
-end
+  end
 
-def after_sign_out_path_for(resource)
+  def after_sign_out_path_for(resource)
     root_path
-end
-
-
+  end
+  # protected
  protected
-
  def customer_state
   @customer = Customer.find_by(email: params[:customer][:email])
    return if !@customer
@@ -32,3 +36,4 @@ end
    end
  end
 end
+
