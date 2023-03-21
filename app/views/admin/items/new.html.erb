@@ -1,6 +1,10 @@
-  <h3>商品新規登録</h3>
+  <div class="col-md-5 col-xs-5">
+    <h3>商品新規登録</h3>
+
 <%=form_with model: @item,url: admin_items_path, method: :post do |f| %>
 
+
+  <div class="item-new-form">
   <p>商品画像</p>
   <%= f.file_field :image, accept: "image/*" %>
 
@@ -14,9 +18,10 @@
   <%= f.collection_select :genre_id, @genres, :id, :name, {prompt: "選択してください"} %>
 
   <p>税抜価格</p>
-  <%= f.text_area :price %>円
+  <%= f.text_field :price %>円
 
   <p>販売ステータス</p>
+
 
 <%= f.submit "新規登録", class: "btn btn-success" %>
 
