@@ -1,2 +1,21 @@
-<h1>Public::Orders#new</h1>
-<p>Find me in app/views/public/orders/new.html.erb</p>
+  <h3>注文情報入力</h3>
+
+  支払い方法
+  <%= f.radio_button :payment, :true %>クレジットカード
+  <%= f.radio_button :payment, :false %>銀行振込
+
+  お届け先
+  <%= f.radio_button :customer_id, :true %>ご自身の住所
+
+  <%= f.radio_button :id, :false %>登録済住所からの選択
+  <%= f.collection_select :address, @genres, :id, :name, :postal_code {prompt: "選択してください"} %>
+
+
+  <%= f.radio_button :is_active, :false %>新しいお届け先
+  郵便番号<%= f.text_area :postal_code %>
+  住所<%= f.text_area :address %>
+  宛先<%= f.text_area :name %>
+
+
+    <%= f.submit "確認画面へ進む" ,class: "btn btn-primary text-right" %>
+<p></p>

@@ -3,6 +3,7 @@
 <p>登録情報</p>
 
 <table>
+  <tbody>
   <% @customers.each do |customer| %>
     <tr>
       <td>氏名</td> <td><%= customer.last_name %>  <%= customer.first_name %></td>
@@ -23,6 +24,7 @@
       <td>メールアドレス</td> <td><%= customer.email %></td>
     </tr>
   <% end %>
+  <tbody>
 </table>
 
 

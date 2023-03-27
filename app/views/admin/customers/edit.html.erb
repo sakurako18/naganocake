@@ -1,39 +1,45 @@
-  <h3><%= customer.last_name+first_name %>さんの会員情報</h3>
+  <h3><%= @customer.last_name + @customer.first_name %>さんの会員情報</h3>
 
-    <% @customers.each do |item| %>
+  <%=form_with model: @customer,url: admin_customer_path, method: :patch do |f| %>
 
-    <tr>
-      <td>会員ID</td>
-      <td><%= customer.1d %></td>
-    </tr>
-    <tr>
-      <td>氏名</td>
-      <td><%= customer.last_name %> <%= customer.first_name %></td>
-    </tr>
-    <tr>
+
+  <table class="table table-hover table-inverse">
+    <thead>
+      <tr>
+        <td>会員ID</td>
+        <td><%= @customer.id %></td>
+      </tr>
+      <tr>
+        <td>氏名</td>
+        <td><%= f.text_field :last_name, class: "mr-5" %> <%= f.text_field :first_name, class: "mr-5" %></td>
+      </tr>
+      <tr>
       <td>フリガナ</td>
-      <td><%= customer.last_name_kana %> <%= customer.first_name_kana %></td>
+      <td><%= f.text_field :last_name_kana, class: "mr-5" %> <%= f.text_field :first_name_kana, class: "mr-5" %></td>
     </tr>
     <tr>
       <td>郵便番号</td>
-      <td><%= customer.postal_code %></td>
+      <td><%= f.text_field :postal_code, class: "mr-5" %></td>
     </tr>
     <tr>
       <td>住所</td>
-      <td><%= customer.address %></td>
+      <td><%= f.text_field :address, class: "mr-5" %></td>
     </tr>
     <tr>
       <td>電話番号</td>
-      <td><%= customer.telephone_number %></td>
+      <td><%= f.text_field :telephone_number, class: "mr-5" %></td>
     </tr>
     <tr>
       <td>メールアドレス</td>
-      <td><%= customer.postal_code %></td>
+      <td><%= f.text_field :email, class: "mr-5" %></td>
     </tr>
     <tr>
       <td>会員ステータス</td>
-      <td><%= customer.is_deleted %></td>
+      <td><%= f.text_field :is_deleted, class: "mr-5" %></td>
     </tr>
+    </thead>
+  </table>
 
-    <%= f.submit "編集する", class: "btn btn-success" %>
-    <%= f.submit "注文履歴一覧を見る", class: "btn btn-primary" %>
+
+  <%= f.submit "変更を保存", class: "btn btn-primary" %>
+      <%end%>

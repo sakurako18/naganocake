@@ -1,18 +1,21 @@
-<h2>商品詳細</h2>
-　<% @items.each do |item| %>
+  <div class="container">
+    <div class="row">
 
-  <%= f.file_field :image, accept: "image/*" %>
-  <p>商品名</p>
-  <%= item.name %>
-  <p>商品説明</p>
-  <%= item.introduction %>
-  <p>ジャンル</p>
-   <%= item.genre_id %>
-  <p>税込価格(税抜価格)</p>
-   <%= item.price %>
+    <%=form_with model: @item,url: admin_items_path, method: :post do |f| %>
 
-  <p>販売ステータス</p>
+    <div class="col-lg-4">
+      <%= image_tag @item.image, size:"300x300", fallback: 'no_image.jpg' %>
+    </div>
+    <div class="col-lg-8">
+      <h2><%= @item.name %></h2>
+      <h5><%= @item.introduction %></h5>
 
-  <%end%>
+      <h2>￥<%= ((@item.price.*1.1).floor).to_s(:delimited, delimiter: ',')%></h2>(税込)
 
-  <%= f.submit "編集する", class: "btn btn-success" %>
+      <div class="col-md-offset-1 col-md-2 text-center">
+        <%= f.select :amount, *[1..9], {prompt: "個数選択"} %>
+        <%= link_to "カートに入れる" , public_cart_items_path, class:"btn btn-lg btn-success" %>
+      </div>
+      <% end %>
+    </div>
+  </div>

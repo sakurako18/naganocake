@@ -8,6 +8,7 @@ class Admin::CustomersController < ApplicationController
   end
 
   def edit
+    @customers = Customer.all
     @customer = Customer.find(params[:id])
   end
 
