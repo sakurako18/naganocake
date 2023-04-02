@@ -1,7 +1,6 @@
   <div class="container">
     <div class="row">
 
-    <%=form_with model: @item,url: admin_items_path, method: :post do |f| %>
 
     <div class="col-lg-4">
       <%= image_tag @item.image, size:"300x300", fallback: 'no_image.jpg' %>
@@ -13,9 +12,11 @@
       <h2>￥<%= ((@item.price.*1.1).floor).to_s(:delimited, delimiter: ',')%></h2>(税込)
 
       <div class="col-md-offset-1 col-md-2 text-center">
+        <%=form_with model: @cart_item, url:  public_cart_items_path, method: :post do |f| %>
+        <%= f.hidden_field :item_id, value: @item.id %>
         <%= f.select :amount, *[1..9], {prompt: "個数選択"} %>
-        <%= link_to "カートに入れる" , public_cart_items_path, class:"btn btn-lg btn-success" %>
+        <%= f.submit "カートに入れる" , class:"btn btn-lg btn-success" %>
+        <% end %>
       </div>
-      <% end %>
     </div>
   </div>

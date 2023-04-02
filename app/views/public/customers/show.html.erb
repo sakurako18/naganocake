@@ -2,28 +2,26 @@
 
 <p>登録情報</p>
 
-<table>
+<table class= "table-borderess">
   <tbody>
-  <% @customers.each do |customer| %>
     <tr>
-      <td>氏名</td> <td><%= customer.last_name %>  <%= customer.first_name %></td>
+      <td>氏名</td> <td><%= @customers.last_name %>  <%= @customers.first_name %></td>
     </tr>
     <tr>
-      <td>カナ</td> <td><%= customer.last_name_kana %>  <%= customer.first_name_kana %></td>
+      <td>カナ</td> <td><%= @customers.last_name_kana %>  <%= @customers.first_name_kana %></td>
     </tr>
     <tr>
-      <td>郵便番号</td> <td><%= customer.postal_code %></td>
+      <td>郵便番号</td> <td><%= @customers.postal_code %></td>
     </tr>
     <tr>
-      <td>住所</td> <td><%= customer.address %></td>
+      <td>住所</td> <td><%= @customers.address %></td>
     </tr>
     <tr>
-      <td>電話番号</td> <td><%= customer.telephone_number %></td>
+      <td>電話番号</td> <td><%= @customers.telephone_number %></td>
     </tr>
     <tr>
-      <td>メールアドレス</td> <td><%= customer.email %></td>
+      <td>メールアドレス</td> <td><%= @customers.email %></td>
     </tr>
-  <% end %>
   <tbody>
 </table>
 
