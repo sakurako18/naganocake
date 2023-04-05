@@ -31,12 +31,13 @@ Rails.application.routes.draw do
     get "/customers/unsubscribe" => "customers#unsubscribe"  #顧客の退会確認画面
     patch "/customers/withdraw" => "customers#withdraw"        #顧客の退会処理
 
-    resources :cart_items, only: [:index, :update, :destroy, :destroy_all, :create]
-    get "/cart_items/destroy_all" => "cart_items#destroy_all" #カート内商品一括削除
 
+    delete "/cart_items/destroy_all" => "cart_items#destroy_all" #カート内商品一括削除
+    resources :cart_items, only: [:index, :update, :destroy, :create]
+    
     resources :orders, only: [:new, :create, :index, :show]
-    get "/orders/confirm" => "cart_items#confirm" #カート内商品一括削除
-    get "/orders/complete" => "cart_items#complete" #カート内商品一括削除
+    post "/orders/confirm" => "orders#confirm" #カート内商品一括削除
+    get "/orders/complete" => "orders#complete" #カート内商品一括削除
 
     resources :addresses, only: [:index, :edit, :create, :update, :destroy]
   end

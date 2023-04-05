@@ -1,6 +1,6 @@
   <h3>注文情報入力</h3>
 
-<%= form_with model: @order, url: public_orders_path do |f| %>
+<%= form_with model: @order, url: public_orders_confirm_path do |f| %>
 
   <p>支払い方法</p>
   <%= f.radio_button :payment_method, "credit_card" %>
