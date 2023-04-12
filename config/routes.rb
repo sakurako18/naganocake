@@ -34,7 +34,7 @@ Rails.application.routes.draw do
 
     delete "/cart_items/destroy_all" => "cart_items#destroy_all" #カート内商品一括削除
     resources :cart_items, only: [:index, :update, :destroy, :create]
-    
+
     resources :orders, only: [:new, :create, :index, :show]
     post "/orders/confirm" => "orders#confirm" #カート内商品一括削除
     get "/orders/complete" => "orders#complete" #カート内商品一括削除

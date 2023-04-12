@@ -1,10 +1,28 @@
+<div class="container">
+  <div class="row">
+      <div class="col-xs-9 col-xs-offset-1">
+        <p class="text-center">
+        <h4 style="font-family: HiraMinPro-W6; color: #000000; margin: 20px 0;">ようこそ、ながのCAKEへ！<br>
+        このサイトは、ケーキ販売のECサイトになります。<br>
+        会員ではない方も商品の観覧はできますが、<br>
+        購入には会員登録が必要になります。<br>
+        </h4></p>
+        <h3 class="recommended-items" style="font-family: HiraMinPro-W6; color: #000000;">オススメ商品</h3>
 
+            <div class="row">
 
-<p>ようこそ、ながのCAKEへ！</p>
-<p>このサイトは、ケーキ販売のECサイトになります。</p>
-<p>会員ではない方も商品の観覧はできますが、</p>
-<p>購入には会員登録が必要になります。</p>
+            <% @items.order("id DESC") .limit(4).each do |item| %>
+            <div class="col-3">
+            <%= link_to public_item_path(item.id) do %>
+            <%= image_tag item.get_image, size: '200x200' %><br>
+            <% end %>
+            <%= item.name %><br>
+            ¥<%= item.price.to_s(:delimited, delimiter: ',') %>
+            </div>
+            <% end %>
+          </div>
+        </div>
 
-
- <h1>新着商品</h1>
-
+        </div>
+        <%= link_to "全ての商品を見る", public_items_path, class: "pull-right", style: "font-family: HiraMinPro-W6; color: #000000; margin: 30px 0;" %>
+</div>

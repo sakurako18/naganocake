@@ -1,6 +1,7 @@
 <h2>マイページ</h2>
 
-<p>登録情報</p>
+<p>登録情報  <%= link_to "編集する", edit_public_customers_path(@customers), class: "col-xs-12 btn btn-success"%></p>
+
 
 <table class= "table-borderess">
   <tbody>
@@ -26,6 +27,6 @@
 </table>
 
 
-<p>配送先</p>
+<p>配送先  <%= link_to "一覧を見る", public_addresses_path(@customers), class: "col-xs-12 btn btn-primary"%></p>
 
-<p>注文履歴</p>
+<p>注文履歴  <%= link_to "一覧を見る", public_orders_path(@customers), class: "col-xs-12 btn btn-primary"%></p>

@@ -1,6 +1,5 @@
 class Admin::SessionsController < Devise::SessionsController
   layout 'layouts/application'
-
   # GET /resource/sign_in
   # def new
   #   super

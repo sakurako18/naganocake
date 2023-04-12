@@ -2,24 +2,29 @@
 
 <%= form_with model: @order, url: public_orders_confirm_path do |f| %>
 
-  <p>支払い方法</p>
-  <%= f.radio_button :payment_method, "credit_card" %>
-  <%= f.label :payment_method_credit_card, "クレジットカード" %>
-<p></p>
-  <%= f.radio_button :payment_method, "transfer" %>
-  <%= f.label :payment_method_transfer, "銀行振込" %>
-<p></p>
 
-  <p>お届け先</p>
-  <%= f.radio_button :address_method, "address" %>
-  <%= f.label :address_method_my_home, "ご自身の住所" %>
+  <strong>支払い方法</strong>
+
+  <%= f.radio_button :payment, "credit_card" %>
+  <%= f.label :payment_credit_card, "クレジットカード" %><br>
+  <%= f.radio_button :payment, "transfer" %>
+  <%= f.label :payment_transfer, "銀行振込" %><br>
+
+
+  <strong>お届け先</strong>
+  <p><%= f.radio_button :address, 0 %>
+  <%= f.label :address_my_home, "ご自身の住所" %></p>
+  <p><%= @customers.postal_code %> <%= @customers.address %></p>
+  <%= @customers.last_name %> <%= @customers.first_name %>
+
 <p></p>
-  <%= f.radio_button :address_method, "address" %>
-  <%= f.label :address_method_registered_address, "登録済住所からの選択" %>
-  <%= f.select :address_id, options_from_collection_for_select(Address.all, :id, :address_display) %>
+  <%= f.radio_button :address, 1 %>
+  <%= f.label :address_registered_address, "登録済住所からの選択" %>
+  <%= f.select :address_id, options_from_collection_for_select(current_customer.addresses.all, :id, :address_display) %>
+  <!--<　% f.collection_select :address_id, @addresses, :id, :name, {prompt: "選択してください"} %>-->
 <p></p>
-  <%= f.radio_button :address_method, "address" %>
-  <%= f.label :address_method_new_address, "新しいお届け先" %>
+  <%= f.radio_button :address, 2 %>
+  <%= f.label :address_new_address, "新しいお届け先" %>
   郵便番号<%= f.text_area :postal_code %>
   住所<%= f.text_area :address %>
   宛先<%= f.text_area :name %>
