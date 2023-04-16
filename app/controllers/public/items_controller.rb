@@ -12,4 +12,9 @@ class Public::ItemsController < ApplicationController
         price*1.1
   end
 
+  private
+  def item_params
+    params.require(:item).permit(:image)
+  end
+
 end

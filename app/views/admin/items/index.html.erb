@@ -4,13 +4,13 @@
       <h2>商品一覧</h2>
 
       <div class="text-right">
-          <%= link_to "新規登録" ,new_admin_item_path, class:"btn btn-lg btn-success" %>
+          <%= link_to "新規登録", new_admin_item_path, class:"btn btn-lg btn-success" %>
       </div>
 
         <table class="table">
           <thead>
             <tr>
-              <th>商品id</th>
+              <th>商品ID</th>
               <th>商品名</th></th>
               <th>税抜価格</th>
               <th>ジャンル</th>
@@ -21,7 +21,7 @@
             <% @items.each do |item| %>
               <tr>
                 <td><%= item.id %></td>
-                <td><%= link_to admin_item_path(item) do %>
+                <td><%= link_to admin_item_path(item), style: "font-family: HiraMinPro-W6; color: #000000; margin: 30px 0;" do %>
                 <%= item.name %>
                 <% end %></td>
                 <td><%= item.price.to_s(:delimited) %></td>
@@ -36,6 +36,7 @@
             <% end %>
           </tbody>
         </table>
+          <%= paginate @items, style: "font-family: HiraMinPro-W6; color: #000000; margin: 30px 0;" %>
       </div>
     </div>
   </div>

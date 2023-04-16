@@ -2,19 +2,33 @@ class Public::OrdersController < ApplicationController
 
   def new
     @order = Order.new
-    @cart_items = current_customer.cart_items
     @customers = current_customer
 
+    @cart_items = @customers.cart_items
+      if @cart_items == nil
+        render public_cart_items_path
+      end
   end
 
   def create
     @order = Order.new(order_params)
     @order.save
+    cart_items = current_customer.cart_items
+      cart_items.each do |cart_item|
+        order_detail = OrderDetail.new
+        order_detail.item_id = cart_item.item_id
+        order_detail.order_id = @order.id
+        order_detail.price = cart_item.item.price
+        order_detail.amount =cart_item.amount
+        order_detail.making_status = 0
+        order_detail.save
+      end
     redirect_to public_orders_complete_path
   end
 
   def complete
-
+    cart_items = current_customer.cart_items
+    cart_items.destroy_all
   end
 
   def confirm
@@ -24,22 +38,16 @@ class Public::OrdersController < ApplicationController
     @order.postage = 800
     @total_price = @cart_items.cart_items_total_price(@cart_items)
 
-    if params[:order][:address] == "0"
+    if params[:order][:address_radio_button] == "0"
       @order.postal_code = current_customer.postal_code
       @order.address = current_customer.address
       @order.name = current_customer.first_name + current_customer.last_name
 
-    elsif params[:order][:address] == "1"
+    elsif params[:order][:address_radio_button] == "1"
+      @address = Address.find(params[:order][:address_id])
       @order.postal_code = @address.postal_code
       @order.address = @address.address
       @order.name = @address.name
-
-    elsif params[:order][:address] == "2"
-      @address = current_customer.addresses.new
-      @address.address = params[:order][:address]
-      @address.save
-      @order.address = @address.address
-
     end
 
 
@@ -55,12 +63,15 @@ class Public::OrdersController < ApplicationController
   end
 
   def show
-     @order = current_customer.orders.find(params[:id])
+    @order = current_customer.orders.find(params[:id])
+    @order_details = order.order_details
+    order_details = current_customer.orders.item.all
+
   end
 
     private
   def order_params
-    params.require(:order).permit(:payment, :payment, :postal_code, :address, :name, :total_price, :customer_id, :postage, :order_status)
+    params.require(:order).permit(:payment, :postal_code, :address, :name, :total_price, :customer_id, :postage, :order_status)
   end
 
 end

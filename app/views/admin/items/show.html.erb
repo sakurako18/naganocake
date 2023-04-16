@@ -7,7 +7,9 @@
 <div class="container">
   <div class="row">
     <div class="col-md-5 col-xl-5">
-　　　<%= image_tag @item.image, size:"400x400", fallback: 'no_image.jpg' %>
+　　　<%= link_to public_item_path(@item.id) do %>
+      　<%= image_tag @item.get_image, size: '200x200' %>
+      <% end %>
     </div>
     <div class="col-md-7">
       <table class="table">
@@ -26,22 +28,23 @@
           </tr>
           <tr>
             <td>税込価格(税抜価格)</td>
-            <td><%= (@item.price*1.1).floor %>円</td>
+            <td><%= ((@item.price * 1.1).floor).to_s(:delimited) %> （<%= @item.price.to_s(:delimited, delimiter: ',') %>）円</td>
           </tr>
           <tr>
             <td>販売ステータス</td>
             <td>
             <% if @item.is_active == true %>
-            販売中
+              販売中
             <% else %>
-            販売停止中
+              販売停止中
             <% end %>
+
             </td>
           </tr>
         </tbody>
       </table>
 
-      <div class="col-md-offset-1 col-md-2 text-center">
+      <div class="col-md-offset-1">
         <%= link_to "編集する" , edit_admin_item_path(@item), class:"btn btn-lg btn-success" %>
       </div>
     </div>

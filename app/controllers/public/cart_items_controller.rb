@@ -3,6 +3,8 @@ class Public::CartItemsController < ApplicationController
   def index
     @cart_items = current_customer.cart_items
     @total_price = 0
+
+
   end
 
   def create
@@ -21,6 +23,8 @@ class Public::CartItemsController < ApplicationController
       else# 保存できなかった場合
             render 'index'
       end
+
+
   end
 
   def update
@@ -35,7 +39,7 @@ class Public::CartItemsController < ApplicationController
     redirect_to public_cart_items_path
   end
 
-   def destroy_all
+  def destroy_all
     current_customer.cart_items.destroy_all
     redirect_to public_cart_items_path
     # notice: 'カートが空になりました。'

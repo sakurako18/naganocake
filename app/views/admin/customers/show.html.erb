@@ -67,7 +67,11 @@
           ステータス
         </th>
           <td>
-            <%= @customer.is_deleted %>
+            <% if @customer.is_deleted == false %>
+              有効
+            <% else %>
+              退会
+            <% end %>
           </td>
       </tr>
     </thead>
@@ -76,7 +80,7 @@
   <div class="col-md-offset-1 col-md-2 text-center">
     <%= link_to  "編集する", edit_admin_customer_path, class: "btn btn-success" %>
 
-    <%= link_to  "注文履歴一覧を見る", admin_order_path, class: "btn btn-primary" %>
+    <%= link_to  "注文履歴一覧を見る", admin_path, class: "btn btn-primary" %>
   </div>
 
   </div>
