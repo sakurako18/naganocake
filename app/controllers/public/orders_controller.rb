@@ -5,8 +5,8 @@ class Public::OrdersController < ApplicationController
     @customers = current_customer
 
     @cart_items = @customers.cart_items
-      if @cart_items == nil
-        render public_cart_items_path
+      if @cart_items.empty?
+        redirect_to public_cart_items_path
       end
   end
 
@@ -41,7 +41,7 @@ class Public::OrdersController < ApplicationController
     if params[:order][:address_radio_button] == "0"
       @order.postal_code = current_customer.postal_code
       @order.address = current_customer.address
-      @order.name = current_customer.first_name + current_customer.last_name
+      @order.name = current_customer.last_name + current_customer.first_name
 
     elsif params[:order][:address_radio_button] == "1"
       @address = Address.find(params[:order][:address_id])
@@ -60,12 +60,14 @@ class Public::OrdersController < ApplicationController
 
   def index
     @orders = current_customer.orders
+
+
   end
 
   def show
     @order = current_customer.orders.find(params[:id])
-    @order_details = order.order_details
-    order_details = current_customer.orders.item.all
+    @order_details = @order.order_details
+
 
   end
 

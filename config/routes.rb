@@ -26,7 +26,7 @@ Rails.application.routes.draw do
     get "/about" => "homes#about"
 
     resources :items, only: [:index, :show]
-
+    
     resource :customers, only: [:index,:show, :edit, :update]
     get "/customers/unsubscribe" => "customers#unsubscribe"  #顧客の退会確認画面
     patch "/customers/withdraw" => "customers#withdraw"        #顧客の退会処理

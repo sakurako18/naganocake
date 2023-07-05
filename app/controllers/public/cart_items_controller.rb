@@ -20,7 +20,7 @@ class Public::CartItemsController < ApplicationController
       elsif @cart_item.save
             @cart_items = current_customer.cart_items.all
             render 'index'
-      else# 保存できなかった場合
+      else
             render 'index'
       end
 
